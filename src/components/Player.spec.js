@@ -3,6 +3,18 @@ import userEvent from '@testing-library/user-event';
 import Player from './Player';
 
 describe('Player', () => {
+  it('renders player information and two buttons', () => {
+    render(<Player name="John" score="2" />);
+
+    const buttons = screen.getAllByRole('button');
+    const name = screen.getByText(/john/i);
+    const score = screen.getByText(/2/i);
+
+    expect(buttons).toHaveLength(2);
+    expect(name).toBeInTheDocument();
+    expect(score).toBeInTheDocument();
+  });
+
   it('calls callbacks when increasing or decreasing score', () => {
     const decreaseCallback = jest.fn();
     const increaseCallback = jest.fn();
@@ -22,7 +34,11 @@ describe('Player', () => {
       name: /decrease score/i,
     });
 
-    // click increase button twice and decrease button once and check that
-    // the respective functions have been called twice / once
+    userEvent.click(increaseButton);
+    userEvent.click(increaseButton);
+    userEvent.click(decreaseButton);
+
+    expect(decreaseCallback).toHaveBeenCalledTimes(1);
+    expect(increaseCallback).toHaveBeenCalledTimes(2);
   });
 });
