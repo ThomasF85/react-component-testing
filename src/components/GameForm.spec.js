@@ -6,12 +6,13 @@ describe('GameForm', () => {
     render(<GameForm />);
 
     const nameOfGameInput = screen.getByLabelText(/name of game/i);
+    const playerNamesInput = screen.getByLabelText(
+      /player names, separated by comma/i
+    );
     const submitButton = screen.getByRole('button', { name: /create/i });
 
     expect(nameOfGameInput).toBeInTheDocument();
+    expect(playerNamesInput).toBeInTheDocument();
     expect(submitButton).toBeInTheDocument();
-
-    // Exercise:
-    // check for another input with the label text: "player names, separated by comma"
   });
 });
