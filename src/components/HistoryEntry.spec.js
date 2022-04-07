@@ -45,6 +45,14 @@ describe('HistoryEntry', () => {
     const button = screen.getByRole('button', { name: /show score/i });
     userEvent.click(button);
 
-    // ToDo: Check that player1 and player2 and their scores are being rendered after button click
+    const player1 = screen.getByText(/john/i);
+    const player2 = screen.getByText(/jane/i);
+    const playerScore1 = screen.getByText(/2/i);
+    const playerScore2 = screen.getByText(/1/i);
+
+    expect(player1).toBeInTheDocument();
+    expect(player2).toBeInTheDocument();
+    expect(playerScore1).toBeInTheDocument();
+    expect(playerScore2).toBeInTheDocument();
   });
 });
